@@ -1,4 +1,4 @@
-package com.amigoscode.customer;
+package com.amigoscode.fraud.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -10,6 +10,7 @@
   <name>services</name>
   <modules>
     <module>customer</module>
+      <module>fraud</module>
   </modules>
   <!--  <modules>-->
 <!--    <module>customer</module>-->
