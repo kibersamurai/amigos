@@ -1,33 +1,53 @@
 services:
-  postgres-fraud:
-    container_name: postgres-fraud
-    image: postgres
-    environment:
-      POSTGRES_USER: fraud
-      POSTGRES_PASSWORD: password
-      PGDATA: /data/postgres
-    volumes:
-      - postgres-fraud:/data/postgres
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
     ports:
-      - "5433:5432"
-    networks:
-      - postgres-fraud
-    restart: unless-stopped
+      - "9411:9411"
+#  postgres_fraud:
+#    container_name: postgres_fraud
+#    image: postgres
+#    environment:
+#      POSTGRES_USER: fraud
+#      POSTGRES_PASSWORD: password
+#      PGDATA: /data/postgres
+#    volumes:
+#      - postgres_fraud:/data/postgres
+#    ports:
+#      - "5433:5432"
+#    networks:
+#      - postgres_fraud
+#    restart: unless-stopped
+#
+#  postgres_customer:
+#    container_name: postgres_customer
+#    image: postgres
+#    environment:
+#      POSTGRES_USER: amigoscode
+#      POSTGRES_PASSWORD: password
+#      PGDATA: /data/postgres
+#    volumes:
+#      - postgres_customer:/data/postgres
+#    ports:
+#      - "5432:5432"
+#    networks:
+#      - postgres_customer
+#    restart: unless-stopped
 
-  postgres:
-    container_name: postgres
-    image: postgres
-    environment:
-      POSTGRES_USER: amigoscode
-      POSTGRES_PASSWORD: password
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - postgres
-    restart: unless-stopped
+#  postgres_notification:
+#    container_name: postgres_notification
+#    image: postgres
+#    environment:
+#      POSTGRES_USER: amigoscode
+#      POSTGRES_PASSWORD: password
+#      PGDATA: /data/postgres
+#    volumes:
+#      - postgres_notification:/data/postgres
+#    ports:
+#      - "5434:5432"
+#    networks:
+#      - postgres_notification
+#    restart: unless-stopped
 
   pgadmin:
     container_name: pgadmin
@@ -40,18 +60,22 @@ services:
       - pgadmin:/var/lib/pgadmin
     ports:
       - "5050:80"
-    networks:
-      - postgres
-      - postgres-fraud
+#    networks:
+#      - postgres_customer
+#      - postgres_fraud
+#      - postgres_notification
     restart: unless-stopped
 
-networks:
-  postgres:
-    driver: bridge
-  postgres-fraud:
-    driver: bridge
+#networks:
+#  postgres_customer:
+#    driver: bridge
+#  postgres_fraud:
+#    driver: bridge
+#  postgres_notification:
+#    driver: bridge
 
 volumes:
-  postgres:
+#  postgres_customer:
+#  postgres_notification:
   pgadmin:
-  postgres-fraud:
+#  postgres_fraud:

@@ -13,6 +13,8 @@
     <module>fraud</module>
     <module>eureka-server</module>
     <module>clients</module>
+    <module>notification</module>
+      <module>apigw</module>
   </modules>
   <!--  <modules>-->
 <!--    <module>customer</module>-->
@@ -58,6 +60,7 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
+
   </dependencies>
 
   <build>
