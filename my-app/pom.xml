@@ -17,9 +17,6 @@
       <module>apigw</module>
       <module>amqp</module>
   </modules>
-  <!--  <modules>-->
-<!--    <module>customer</module>-->
-<!--  </modules>-->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,6 +24,7 @@
     <maven.compiler.target>18</maven.compiler.target>
     <spring.version>2.5.7</spring.version>
     <spring.cloud-version>2020.0.3</spring.cloud-version>
+    <image>padre13/${project.artifactId}:${project.version}</image>
   </properties>
 
   <dependencyManagement>
@@ -61,7 +59,6 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -71,8 +68,59 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>com.google.cloud.tools</groupId>
+          <artifactId>jib-maven-plugin</artifactId>
+          <version>3.4.1</version>
+          <configuration>
+            <from>
+              <image>eclipse-temurin:11</image>
+              <platforms>
+                <platform>
+                  <architecture>amd64</architecture>
+                  <os>linux</os>
+                </platform>
+                <platform>
+                  <architecture>arm64</architecture>
+                  <os>linux</os>
+                </platform>
+              </platforms>
+            </from>
+            <to>
+              <tags>
+                <tag>latest</tag>
+              </tags>
+            </to>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>build</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>18</source>
+          <target>18</target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
